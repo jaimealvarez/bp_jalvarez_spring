@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,7 +14,8 @@ import javax.validation.constraints.Size;
 public class Cuenta {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUENTA_SEQ")
+	@SequenceGenerator(sequenceName = "cuenta_seq", allocationSize = 1, name = "CUENTA_SEQ")
 	private Integer id;
 	
 	@NotNull

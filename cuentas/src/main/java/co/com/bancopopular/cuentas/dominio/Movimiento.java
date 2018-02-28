@@ -7,13 +7,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Movimiento {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MOVIMIENTO_SEQ")
+	@SequenceGenerator(sequenceName = "movimiento_seq", allocationSize = 1, name = "MOVIMIENTO_SEQ")
 	private Integer id;
 	
 	@NotNull

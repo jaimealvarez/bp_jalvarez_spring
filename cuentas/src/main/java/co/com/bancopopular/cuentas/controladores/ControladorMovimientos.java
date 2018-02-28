@@ -1,5 +1,6 @@
 package co.com.bancopopular.cuentas.controladores;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import co.com.bancopopular.cuentas.dominio.Auditoría;
 import co.com.bancopopular.cuentas.dominio.Movimiento;
+import co.com.bancopopular.cuentas.repositorios.RepositorioAuditoría;
 import co.com.bancopopular.cuentas.servicios.ServicioMovimientos;
 
 @RestController
@@ -19,9 +25,16 @@ public class ControladorMovimientos {
 
 	private ServicioMovimientos servicioMovimientos;
 	
+	private RepositorioAuditoría repositorioAuditoría;
+	
 	@Autowired
 	public void setServicioMovimientos(ServicioMovimientos servicioMovimientos) {
 		this.servicioMovimientos = servicioMovimientos;
+	}
+	
+	@Autowired
+	public void setRepositorioAuditoría(RepositorioAuditoría repositorioAuditoría) {
+		this.repositorioAuditoría = repositorioAuditoría;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -60,6 +73,19 @@ public class ControladorMovimientos {
         } else {
             _movimiento = movimiento;
         }
+        
+        Auditoría auditoría = new Auditoría();
+        auditoría.setAcción("Movimiento.guardarOActualizar");
+        auditoría.setUsuario("jalvarez");
+        auditoría.setFechaHora(new Date());
+        try {
+			auditoría.setParámetros(new ObjectMapper().writeValueAsString(_movimiento));
+			repositorioAuditoría.save(auditoría);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         return ResponseEntity.ok(servicioMovimientos.guardarOActualizar(_movimiento));
 	}
 }
