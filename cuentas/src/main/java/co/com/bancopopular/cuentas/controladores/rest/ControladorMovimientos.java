@@ -1,4 +1,4 @@
-package co.com.bancopopular.cuentas.controladores;
+package co.com.bancopopular.cuentas.controladores.rest;
 
 import java.util.Date;
 import java.util.List;
