@@ -41,7 +41,6 @@ public class ControladorCuentas {
             _cuenta = servicioCuentas.obtenerPorId(cuenta.getId());
             if(_cuenta != null)
             {
-            	//Datos que se pueden modificar de un usuario existente
                 if (cuenta.getNúmero() != null) {
                     _cuenta.setNúmero(cuenta.getNúmero());
                 }

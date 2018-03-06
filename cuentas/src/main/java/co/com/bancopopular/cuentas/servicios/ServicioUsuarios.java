@@ -9,6 +9,8 @@ public interface ServicioUsuarios {
 	List<Usuario> listar();
 
     Usuario obtenerPorId(Integer id);
+    
+    Usuario obtenerPorUsuario(String usuario);
 
     Usuario guardarOActualizar(Usuario usuario);
 

@@ -54,7 +54,6 @@ public class ControladorMovimientos {
             _movimiento = servicioMovimientos.obtenerPorId(movimiento.getId());
             if(_movimiento != null)
             {
-            	//Datos que se pueden modificar de un usuario existente
                 if (movimiento.getValor() != null) {
                     _movimiento.setValor(movimiento.getValor());
                 }

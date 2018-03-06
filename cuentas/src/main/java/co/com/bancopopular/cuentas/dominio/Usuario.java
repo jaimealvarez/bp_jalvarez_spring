@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,6 +28,11 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
 	private List<Cuenta> cuentas = new ArrayList<>();
 
+	@NotNull
+	private String usuario;
+	
+	private String clave;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -49,5 +55,21 @@ public class Usuario {
 
 	public void setCuentas(List<Cuenta> cuentas) {
 		this.cuentas = cuentas;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 }

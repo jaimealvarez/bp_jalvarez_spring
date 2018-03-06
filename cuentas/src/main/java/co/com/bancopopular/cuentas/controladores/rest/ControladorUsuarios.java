@@ -42,13 +42,18 @@ public class ControladorUsuarios {
             _usuario = servicioUsuarios.obtenerPorId(usuario.getId());
             if(_usuario != null)
             {
-            	//Datos que se pueden modificar de un usuario existente
                 if (usuario.getNombre() != null) {
                     _usuario.setNombre(usuario.getNombre());
                 }
+                if (usuario.getUsuario() != null) {
+                	_usuario.setUsuario(usuario.getUsuario());
+                }
+                if (usuario.getClave() != null) {
+                	_usuario.setClave(usuario.getClave());
+                }
                 if (usuario.getCuentas() != null) {
                     _usuario.setCuentas(usuario.getCuentas());
-                }
+                }                
             }else{
             	_usuario = usuario; 
             }
