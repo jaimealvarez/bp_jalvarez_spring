@@ -18,6 +18,7 @@ import co.com.bancopopular.cuentas.dominio.Auditoría;
 import co.com.bancopopular.cuentas.dominio.Movimiento;
 import co.com.bancopopular.cuentas.repositorios.RepositorioAuditoría;
 import co.com.bancopopular.cuentas.servicios.ServicioMovimientos;
+import co.com.bancopopular.cuentas.servicios.ServicioRegistroActividad;
 
 @RestController
 @RequestMapping(value = "/movimientos")
@@ -26,6 +27,13 @@ public class ControladorMovimientos {
 	private ServicioMovimientos servicioMovimientos;
 	
 	private RepositorioAuditoría repositorioAuditoría;
+	
+    private ServicioRegistroActividad servicioRegistroActividad;
+
+    @Autowired
+    public void setSendTextMessageService(ServicioRegistroActividad servicioRegistroActividad) {
+        this.servicioRegistroActividad = servicioRegistroActividad;
+    }
 	
 	@Autowired
 	public void setServicioMovimientos(ServicioMovimientos servicioMovimientos) {
@@ -78,10 +86,11 @@ public class ControladorMovimientos {
         auditoría.setUsuario("jalvarez");
         auditoría.setFechaHora(new Date());
         try {
-			auditoría.setParámetros(new ObjectMapper().writeValueAsString(_movimiento));
+        	String registro = new ObjectMapper().writeValueAsString(_movimiento);
+			auditoría.setParámetros(registro);
 			repositorioAuditoría.save(auditoría);
+			servicioRegistroActividad.registrarSolicitud(registro);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         

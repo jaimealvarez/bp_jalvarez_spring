@@ -6,8 +6,8 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import co.com.bancopopular.cuentas.dominio.Cuenta;
-import co.com.bancopopular.cuentas.servicios.BeanUtil;
 import co.com.bancopopular.cuentas.servicios.ServicioCuentas;
+import co.com.bancopopular.cuentas.util.BeanUtil;
 
 @WebService(endpointInterface = "co.com.bancopopular.cuentas.controladores.soap.ServicioWebCuentas")
 public class ServicioWebCuentasImpl implements ServicioWebCuentas {

@@ -5,8 +5,8 @@ import java.util.List;
 import javax.jws.WebService;
 
 import co.com.bancopopular.cuentas.dominio.Usuario;
-import co.com.bancopopular.cuentas.servicios.BeanUtil;
 import co.com.bancopopular.cuentas.servicios.ServicioUsuarios;
+import co.com.bancopopular.cuentas.util.BeanUtil;
 
 @WebService(endpointInterface = "co.com.bancopopular.cuentas.controladores.soap.ServicioWebUsuarios")
 public class ServicioWebUsuariosImpl implements ServicioWebUsuarios {

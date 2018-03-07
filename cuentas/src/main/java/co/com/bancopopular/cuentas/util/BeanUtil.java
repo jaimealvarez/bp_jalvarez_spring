@@ -1,4 +1,4 @@
-package co.com.bancopopular.cuentas.servicios;
+package co.com.bancopopular.cuentas.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
